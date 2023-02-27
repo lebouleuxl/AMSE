@@ -52,7 +52,10 @@ class GridViewTest extends StatelessWidget {
             ),
             Container(
               color: Colors.orange,
-              child: const Text('Tile 2'),
+              child: SizedBox(
+                  width: 150.0,
+                  height: 150.0,
+                  child: Container(child: this.createTileWidgetFrom(tile))),
             ),
             Container(
               color: Colors.yellow,
