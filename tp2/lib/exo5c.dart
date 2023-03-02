@@ -88,8 +88,8 @@ class _SliderExampleState extends State<SliderExample> {
             child: GridView.count(
                 /*primary: false,*/
                 padding: const EdgeInsets.all(20),
-                crossAxisSpacing: 3,
-                mainAxisSpacing: 3,
+                crossAxisSpacing: 2,
+                mainAxisSpacing: 2,
                 crossAxisCount: _sliderValue.toInt(),
                 children: containers),
           ),
