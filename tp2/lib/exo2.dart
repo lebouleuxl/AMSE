@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 // import 'package:Taquin/util.dart';
-import 'dart:math';
+//import 'dart:math';
 
 class SliderExample extends StatefulWidget {
   const SliderExample({key});
