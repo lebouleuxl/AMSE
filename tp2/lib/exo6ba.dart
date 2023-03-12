@@ -37,6 +37,7 @@ Tile tile = new Tile(
 
 class _SliderExampleState extends State<SliderExample> {
   double _sliderValue = 3;
+  bool isSliderEnabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -85,14 +86,30 @@ class _SliderExampleState extends State<SliderExample> {
                 max: 10,
                 divisions: 10,
                 label: _sliderValue.round().toString(),
-                onChanged: (double value) {
-                  setState(() {
-                    _sliderValue = value;
-                  });
-                },
+                onChanged: isSliderEnabled
+                    ? (double value) {
+                        setState(() {
+                          _sliderValue = value;
+                        });
+                      }
+                    : null,
               ),
-            )
+            ),
+            Text(_sliderValue.round().toString()),
           ]),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      isSliderEnabled = !isSliderEnabled;
+                    });
+                  },
+                  child: Text(
+                      isSliderEnabled ? "Disable Slider" : "Enable Slider")),
+            ],
+          ),
         ],
       ),
     );
