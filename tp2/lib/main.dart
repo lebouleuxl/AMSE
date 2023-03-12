@@ -64,7 +64,7 @@ List exos = [
   Exo(
       title: 'Exercice 6b',
       subtitle: 'Rotate&Scale image',
-      buildFunc: (context) => exo6b.GridViewTest()),
+      buildFunc: (context) => exo6b.PositionedTiles()),
 ];
 
 class MenuPage extends StatelessWidget {
