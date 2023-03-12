@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-// import 'package:Taquin/util.dart';
-//import 'dart:math';
+import 'dart:math' as math;
+
+// ==============
+// Models
+// ==============
+
+math.Random random = new math.Random();
 
 class Tile {
   String imageURL;
@@ -24,15 +29,15 @@ class Tile {
     );
   }
 
-  Widget SecondCroppedImageTile(double x, double y) {
+  Widget ThirdCroppedImageTile(double x, double y, double ratio) {
     return FittedBox(
       fit: BoxFit.fill,
       child: ClipRect(
         child: Container(
           child: Align(
             alignment: Alignment(x, y),
-            widthFactor: 0.33,
-            heightFactor: 0.33,
+            widthFactor: ratio,
+            heightFactor: ratio,
             child: Image.network(this.imageURL),
           ),
         ),
@@ -41,106 +46,93 @@ class Tile {
   }
 }
 
+// ==============
+// Widgets
+// ==============
+/*
+class TileWidget extends StatelessWidget {
+  final Tile tile;
+
+  TileWidget(this.tile);
+
+  @override
+  Widget build(BuildContext context) {
+    return this.coloredBox();
+  }
+
+  Widget coloredBox() {
+    return Container(
+        color: tile.color,
+        child: Padding(
+          padding: EdgeInsets.all(70.0),
+        ));
+  }
+}
+*/
+void main() => runApp(new MaterialApp(home: PositionedTiles()));
+
+class PositionedTiles extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => PositionedTilesState();
+}
+
 Tile tile = new Tile(
     imageURL: 'assets/images/0-Star-Wars-memes.jpeg',
     alignment: Alignment(0, 0));
 
-class GridViewTest extends StatelessWidget {
+class PositionedTilesState extends State<PositionedTiles> {
+  List<Widget> containers = [];
+
   @override
   Widget build(BuildContext context) {
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        double x = -1 + i * (2 / (3 - 1));
+        double y = -1 + j * (2 / (3 - 1));
+        containers.add(Container(
+          color: Colors.red,
+          child: SizedBox(
+              width: 100,
+              height: 100,
+              child: Container(
+                  child: this.createTileWidgetFrom(tile, y, x, (1 / 3)))),
+        ));
+      }
+    }
     return Scaffold(
       appBar: AppBar(
-        title: Text('GridViewTest'),
+        title: Text('Moving Tiles'),
+        centerTitle: true,
       ),
-      body: Center(
-        child: GridView.count(
-          /*primary: false,*/
-          padding: const EdgeInsets.all(20),
-          crossAxisSpacing: 5,
-          mainAxisSpacing: 5,
-          crossAxisCount: 3,
-          children: <Widget>[
-            Container(
-              color: Colors.red,
-              child: SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: Container(
-                      child: this.createTileWidgetFrom(tile, -1, -1))),
-            ),
-            Container(
-              color: Colors.orange,
-              child: SizedBox(
-                  width: 100,
-                  height: 100,
-                  child:
-                      Container(child: this.createTileWidgetFrom(tile, 0, -1))),
-            ),
-            Container(
-              color: Colors.yellow,
-              child: SizedBox(
-                  width: 100,
-                  height: 100,
-                  child:
-                      Container(child: this.createTileWidgetFrom(tile, 1, -1))),
-            ),
-            Container(
-              color: Colors.green,
-              child: SizedBox(
-                  width: 100,
-                  height: 100,
-                  child:
-                      Container(child: this.createTileWidgetFrom(tile, -1, 0))),
-            ),
-            Container(
-              color: Colors.blue,
-              child: SizedBox(
-                  width: 100,
-                  height: 100,
-                  child:
-                      Container(child: this.createTileWidgetFrom(tile, 0, 0))),
-            ),
-            Container(
-              color: Colors.pink,
-              child: SizedBox(
-                  width: 100,
-                  height: 100,
-                  child:
-                      Container(child: this.createTileWidgetFrom(tile, 1, 0))),
-            ),
-            Container(
-              color: Colors.purple,
-              child: SizedBox(
-                  width: 100,
-                  height: 100,
-                  child:
-                      Container(child: this.createTileWidgetFrom(tile, -1, 1))),
-            ),
-            Container(
-              color: Colors.grey,
-              child: SizedBox(
-                  width: 100,
-                  height: 100,
-                  child:
-                      Container(child: this.createTileWidgetFrom(tile, 0, 1))),
-            ),
-            Container(
-              color: Colors.brown,
-              child: SizedBox(
-                  width: 100,
-                  height: 100,
-                  child:
-                      Container(child: this.createTileWidgetFrom(tile, 1, 1))),
-            ),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(
+            width: 400,
+            height: 400,
+            child: GridView.count(
+                /*primary: false,*/
+                padding: const EdgeInsets.all(20),
+                crossAxisSpacing: 2,
+                mainAxisSpacing: 2,
+                crossAxisCount: 3,
+                children: containers),
+          ),
+          FloatingActionButton(onPressed: swapTiles)
+        ],
       ),
     );
   }
 
-  Widget createTileWidgetFrom(Tile tile, double x, double y) {
+  swapTiles() {
+    setState(() {
+      containers.insert(1, containers.removeAt(0));
+    });
+  }
+
+  Widget createTileWidgetFrom(Tile tile, double x, double y, double ratio) {
     return InkWell(
-      child: tile.SecondCroppedImageTile(x, y),
+      child: tile.ThirdCroppedImageTile(x, y, ratio),
       onTap: () {
         print("tapped on tile");
       },
