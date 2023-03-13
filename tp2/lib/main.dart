@@ -68,7 +68,7 @@ List exos = [
       subtitle: 'Slider qui devient non dispo',
       buildFunc: (context) => exo6ba.SliderExample()),
   Exo(
-      title: 'Autre début taquin',
+      title: 'exo 6b',
       subtitle: 'Slider qui devient non dispo',
       buildFunc: (context) => exo6bb.PositionedTiles()),
   Exo(
