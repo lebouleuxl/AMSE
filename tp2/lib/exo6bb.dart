@@ -10,6 +10,7 @@ math.Random random = new math.Random();
 class Tile {
   Color color;
   int NumeroTile;
+  String nom;
 
   Tile(this.color);
   Tile.randomColor() {
@@ -19,6 +20,7 @@ class Tile {
   Tile.choosenColor(int i) {
     this.color = Colors.red;
     this.NumeroTile = i;
+    this.nom = 'Tile';
   }
 }
 
@@ -38,11 +40,10 @@ class TileWidget extends StatelessWidget {
 
   Widget coloredBox() {
     return Container(
-      alignment: Alignment.center,
-      child: Text('Tile ' + tile.NumeroTile.toString()),
-      color: tile.color,
-      padding: EdgeInsets.all(70.0),
-    );
+        alignment: Alignment.center,
+        child: Text(tile.nom + tile.NumeroTile.toString()),
+        padding: const EdgeInsets.all(8),
+        color: tile.color);
   }
 }
 
@@ -63,6 +64,7 @@ class PositionedTilesState extends State<PositionedTiles> {
   void initState() {
     emptyTile = tiles[0 /*random.nextInt(tiles.length)*/];
     emptyTile.tile.color = Colors.white;
+    emptyTile.tile.nom = 'Empty ';
 
     super.initState();
   }
@@ -90,7 +92,7 @@ class PositionedTilesState extends State<PositionedTiles> {
 
     adjacentTiles.forEach((tilewidget) {
       TileWidget tw = tilewidget;
-      tw.tile.color = Colors.black;
+      tw.tile.color = Colors.yellow;
     });
 
     return Scaffold(
@@ -106,8 +108,6 @@ class PositionedTilesState extends State<PositionedTiles> {
           itemBuilder: (BuildContext context, int i) {
             return container(tiles[i]);
           }),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.sentiment_very_satisfied), onPressed: swapTiles),
     );
   }
 
@@ -116,19 +116,37 @@ class PositionedTilesState extends State<PositionedTiles> {
       child: tile.coloredBox(),
       onTap: () {
         setState(() {
-          swapTiles();
+          swapTiles(tile);
         });
       },
     );
   }
 
-  swapTiles() {
-    setState(() {
-      tiles.insert(1, tiles.removeAt(0));
-      adjacentTiles.forEach((tilewidget) {
-        TileWidget tw = tilewidget;
-        tw.tile.color = Colors.red;
-      });
+  swapTiles(TileWidget tile) {
+    adjacentTiles.forEach((tilewidget) {
+      TileWidget tw = tilewidget;
+      tw.tile.color = Colors.red;
     });
+
+    int IndiceEmptyTile;
+    int i = 0;
+    tiles.forEach((tilewidget) {
+      TileWidget tw = tilewidget;
+      if (tw.tile.NumeroTile == 0) IndiceEmptyTile = i;
+      i++;
+    });
+
+    int IndiceTile;
+    int j = 0;
+    tiles.forEach((tilewidget) {
+      TileWidget tw = tilewidget;
+      if (tw.tile.NumeroTile == tile.tile.NumeroTile) IndiceTile = j;
+      j++;
+    });
+
+    TileWidget removeEmptyTile = tiles.removeAt(IndiceEmptyTile);
+    tiles.insert(IndiceEmptyTile, tile);
+    tiles.removeAt(IndiceTile);
+    tiles.insert(IndiceTile, removeEmptyTile);
   }
 }
