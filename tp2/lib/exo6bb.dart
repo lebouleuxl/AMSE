@@ -16,8 +16,9 @@ class Tile {
     this.color = Color.fromARGB(
         255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
   }
-  Tile.choosenColor() {
+  Tile.choosenColor(int i) {
     this.color = Colors.red;
+    this.NumeroTile = i;
   }
 }
 
@@ -37,9 +38,11 @@ class TileWidget extends StatelessWidget {
 
   Widget coloredBox() {
     return Container(
-        color: tile.color,
-          padding: EdgeInsets.all(70.0),
-        ));
+      alignment: Alignment.center,
+      child: Text('Tile ' + tile.NumeroTile.toString()),
+      color: tile.color,
+      padding: EdgeInsets.all(70.0),
+    );
   }
 }
 
@@ -51,11 +54,45 @@ class PositionedTiles extends StatefulWidget {
 }
 
 class PositionedTilesState extends State<PositionedTiles> {
-  List<Widget> tiles =
-      List<Widget>.generate(16, (index) => TileWidget(Tile.choosenColor()));
+  int SliderValue = 4;
+  TileWidget emptyTile;
+  List<Widget> adjacentTiles;
+  List<Widget> tiles = List<Widget>.generate(
+      16, (index) => TileWidget(Tile.choosenColor(index)));
+
+  void initState() {
+    emptyTile = tiles[0 /*random.nextInt(tiles.length)*/];
+    emptyTile.tile.color = Colors.white;
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    adjacentTiles = [];
+
+    int IndiceEmptyTile;
+    int i = 0;
+    tiles.forEach((tilewidget) {
+      TileWidget tw = tilewidget;
+      if (tw.tile.NumeroTile == 0) IndiceEmptyTile = i;
+      i++;
+    });
+
+    if (IndiceEmptyTile % SliderValue != 0)
+      adjacentTiles.add(tiles[IndiceEmptyTile - 1]);
+    if (IndiceEmptyTile % SliderValue != SliderValue - 1)
+      adjacentTiles.add(tiles[IndiceEmptyTile + 1]);
+    if (IndiceEmptyTile + SliderValue < tiles.length)
+      adjacentTiles.add(tiles[IndiceEmptyTile + SliderValue]);
+    if (IndiceEmptyTile - SliderValue >= 0)
+      adjacentTiles.add(tiles[IndiceEmptyTile - SliderValue]);
+
+    adjacentTiles.forEach((tilewidget) {
+      TileWidget tw = tilewidget;
+      tw.tile.color = Colors.black;
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Moving Tiles'),
@@ -88,6 +125,10 @@ class PositionedTilesState extends State<PositionedTiles> {
   swapTiles() {
     setState(() {
       tiles.insert(1, tiles.removeAt(0));
+      adjacentTiles.forEach((tilewidget) {
+        TileWidget tw = tilewidget;
+        tw.tile.color = Colors.red;
+      });
     });
   }
 }
