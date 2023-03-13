@@ -9,11 +9,15 @@ math.Random random = new math.Random();
 
 class Tile {
   Color color;
+  int NumeroTile;
 
   Tile(this.color);
   Tile.randomColor() {
     this.color = Color.fromARGB(
         255, random.nextInt(255), random.nextInt(255), random.nextInt(255));
+  }
+  Tile.choosenColor() {
+    this.color = Colors.red;
   }
 }
 
@@ -40,7 +44,7 @@ class TileWidget extends StatelessWidget {
   }
 }
 
-void main() => runApp(new MaterialApp(home: PositionedTiles()));
+//void main() => runApp(new MaterialApp(home: PositionedTiles()));
 
 class PositionedTiles extends StatefulWidget {
   @override
@@ -49,14 +53,7 @@ class PositionedTiles extends StatefulWidget {
 
 class PositionedTilesState extends State<PositionedTiles> {
   List<Widget> tiles =
-      List<Widget>.generate(2, (index) => TileWidget(Tile.randomColor()));
-
-  void changeRandomTileColor() {
-    int randomIndex = random.nextInt(2);
-    setState(() {
-      tiles[randomIndex] = TileWidget(Tile(Color.fromARGB(255, 255, 255, 255)));
-    });
-  }
+      List<Widget>.generate(16, (index) => TileWidget(Tile.choosenColor()));
 
   @override
   Widget build(BuildContext context) {
@@ -65,19 +62,27 @@ class PositionedTilesState extends State<PositionedTiles> {
         title: Text('Moving Tiles'),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Row(children: tiles),
-          FloatingActionButton(
-            onPressed: () {
-              changeRandomTileColor();
-            },
-            child: Text("Button"),
-          ),
-        ],
-      ),
+      body: GridView.builder(
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+          primary: false,
+          itemCount: 16,
+          itemBuilder: (BuildContext context, int i) {
+            return container(tiles[i]);
+          }),
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.sentiment_very_satisfied), onPressed: swapTiles),
+    );
+  }
+
+  Widget container(TileWidget tile) {
+    return InkWell(
+      child: tile.coloredBox(),
+      onTap: () {
+        setState(() {
+          swapTiles();
+        });
+      },
     );
   }
 

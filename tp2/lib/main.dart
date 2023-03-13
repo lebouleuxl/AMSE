@@ -11,7 +11,7 @@ import 'test.dart' as test;
 import 'exo6.dart' as exo6;
 import 'exo6ba.dart' as exo6ba;
 import 'exo6bb.dart' as exo6bb;
-import 'exo6bc.dart' as exo6bc;
+import 'AutreMethodeTaquin.dart' as AutreMethodeTaquin;
 
 void main() => runApp(MyApp());
 
@@ -64,17 +64,17 @@ List exos = [
       subtitle: 'Swip deux carrés de couleur',
       buildFunc: (context) => exo6.PositionedTiles()),
   Exo(
-      title: 'Exercice 6ba',
+      title: 'Début Taquin',
       subtitle: 'Slider qui devient non dispo',
       buildFunc: (context) => exo6ba.SliderExample()),
   Exo(
-      title: 'Exercice 6bb',
-      subtitle: 'Case qui devient noir avec lappuie dun boutton',
+      title: 'Autre début taquin',
+      subtitle: 'Slider qui devient non dispo',
       buildFunc: (context) => exo6bb.PositionedTiles()),
   Exo(
-      title: 'Exercice 6bc',
-      subtitle: 'Case qui devient noir avec lappuie dun boutton',
-      buildFunc: (context) => exo6bc.MyHomePage()),
+      title: 'Autre méthode taquin',
+      subtitle: 'Tentative dune autre méthode pour créer le taquin',
+      buildFunc: (context) => AutreMethodeTaquin.AutreMethodeTaquin()),
 ];
 
 class MenuPage extends StatelessWidget {
