@@ -11,6 +11,8 @@ class Tile {
   Color color;
   int NumeroTile;
   String nom;
+  String imageURL;
+  Alignment alignment;
 
   Tile(this.color);
   Tile.randomColor() {
@@ -55,22 +57,26 @@ class PositionedTiles extends StatefulWidget {
 }
 
 class PositionedTilesState extends State<PositionedTiles> {
-  int SliderValue = 4;
+  static const InitSliderValue = 3;
+  int SliderValue = InitSliderValue;
   TileWidget emptyTile;
   List<Widget> adjacentTiles;
-  List<Widget> tiles = List<Widget>.generate(
-      16, (index) => TileWidget(Tile.choosenColor(index)));
-
-  void initState() {
-    emptyTile = tiles[0 /*random.nextInt(tiles.length)*/];
-    emptyTile.tile.color = Colors.white;
-    emptyTile.tile.nom = 'Empty ';
-
-    super.initState();
-  }
+  bool initialisation = true;
+  List<Widget> tiles;
+  bool isSliderEnabled = true;
 
   @override
   Widget build(BuildContext context) {
+    if (initialisation) {
+      tiles = [];
+      for (int i = 0; i < SliderValue * SliderValue; i++) {
+        tiles.add(TileWidget(Tile.choosenColor(i)));
+      }
+      emptyTile = tiles[0 /*random.nextInt(tiles.length)*/];
+      emptyTile.tile.color = Colors.white;
+      emptyTile.tile.nom = 'Empty ';
+    }
+
     adjacentTiles = [];
 
     int IndiceEmptyTile;
@@ -96,19 +102,59 @@ class PositionedTilesState extends State<PositionedTiles> {
     });
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Moving Tiles'),
-        centerTitle: true,
-      ),
-      body: GridView.builder(
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-          primary: false,
-          itemCount: 16,
-          itemBuilder: (BuildContext context, int i) {
-            return container(tiles[i]);
-          }),
-    );
+        appBar: AppBar(
+          title: Text('Moving Tiles'),
+          centerTitle: true,
+        ),
+        body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                width: 400,
+                height: 400,
+                child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: SliderValue),
+                    primary: false,
+                    itemCount: SliderValue * SliderValue,
+                    itemBuilder: (BuildContext context, int i) {
+                      return container(tiles[i]);
+                    }),
+              ),
+              Row(children: <Widget>[
+                Text("Size : "),
+                Expanded(
+                  child: Slider(
+                    value: SliderValue.toDouble(),
+                    min: 0,
+                    max: 10,
+                    divisions: 10,
+                    label: SliderValue.round().toString(),
+                    onChanged: initialisation
+                        ? (double value) {
+                            setState(() {
+                              SliderValue = value.toInt();
+                            });
+                          }
+                        : null,
+                  ),
+                )
+              ]),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          initialisation = !initialisation;
+                        });
+                      },
+                      child: Text(initialisation
+                          ? "Commencer partie"
+                          : "Enable Slider")),
+                ],
+              ),
+            ]));
   }
 
   Widget container(TileWidget tile) {

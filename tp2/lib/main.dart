@@ -10,7 +10,8 @@ import 'exo5c.dart' as exo5c;
 import 'test.dart' as test;
 import 'exo6.dart' as exo6;
 import 'exo6ba.dart' as exo6ba;
-import 'exo6bb.dart' as exo6bb;
+import 'exo6b.dart' as exo6b;
+import 'Taquin.dart' as Taquin;
 import 'AutreMethodeTaquin.dart' as AutreMethodeTaquin;
 
 void main() => runApp(MyApp());
@@ -64,13 +65,17 @@ List exos = [
       subtitle: 'Swip deux carrés de couleur',
       buildFunc: (context) => exo6.PositionedTiles()),
   Exo(
-      title: 'Début Taquin',
+      title: 'Tentative Taquin',
       subtitle: 'Slider qui devient non dispo',
       buildFunc: (context) => exo6ba.SliderExample()),
   Exo(
       title: 'exo 6b',
-      subtitle: 'Slider qui devient non dispo',
-      buildFunc: (context) => exo6bb.PositionedTiles()),
+      subtitle: 'Taquin 4*4 szns image',
+      buildFunc: (context) => exo6b.PositionedTiles()),
+  Exo(
+      title: 'Taquin',
+      subtitle: 'Taquin',
+      buildFunc: (context) => Taquin.PositionedTiles()),
   Exo(
       title: 'Autre méthode taquin',
       subtitle: 'Tentative dune autre méthode pour créer le taquin',
