@@ -9,9 +9,9 @@ import 'exo5b.dart' as exo5b;
 import 'exo5c.dart' as exo5c;
 import 'test.dart' as test;
 import 'exo6.dart' as exo6;
-import 'exo6b.dart' as exo6b;
 import 'exo6ba.dart' as exo6ba;
 import 'exo6bb.dart' as exo6bb;
+import 'exo6bc.dart' as exo6bc;
 
 void main() => runApp(MyApp());
 
@@ -53,7 +53,7 @@ List exos = [
       buildFunc: (context) => exo5b.GridViewTest()),
   Exo(
       title: 'Exercice 5c',
-      subtitle: 'Rotate&Scale image',
+      subtitle: 'Slider',
       buildFunc: (context) => exo5c.SliderExample()),
   Exo(
       title: 'test',
@@ -61,12 +61,8 @@ List exos = [
       buildFunc: (context) => test.MyWidget()),
   Exo(
       title: 'Exercice 6',
-      subtitle: 'Rotate&Scale image',
+      subtitle: 'Swip deux carrés de couleur',
       buildFunc: (context) => exo6.PositionedTiles()),
-  Exo(
-      title: 'Exercice 6b',
-      subtitle: 'Rotate&Scale image',
-      buildFunc: (context) => exo6b.PositionedTiles()),
   Exo(
       title: 'Exercice 6ba',
       subtitle: 'Slider qui devient non dispo',
@@ -75,6 +71,10 @@ List exos = [
       title: 'Exercice 6bb',
       subtitle: 'Case qui devient noir avec lappuie dun boutton',
       buildFunc: (context) => exo6bb.PositionedTiles()),
+  Exo(
+      title: 'Exercice 6bc',
+      subtitle: 'Case qui devient noir avec lappuie dun boutton',
+      buildFunc: (context) => exo6bc.MyHomePage()),
 ];
 
 class MenuPage extends StatelessWidget {
