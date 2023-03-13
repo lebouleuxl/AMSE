@@ -38,7 +38,6 @@ class TileWidget extends StatelessWidget {
   Widget coloredBox() {
     return Container(
         color: tile.color,
-        child: Padding(
           padding: EdgeInsets.all(70.0),
         ));
   }
