@@ -33,7 +33,7 @@ class GridViewTest extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('GridViewTest'),
+        title: Text('Plateau de tuiles classique'),
       ),
       body: Center(
         child: GridView.count(
@@ -45,17 +45,11 @@ class GridViewTest extends StatelessWidget {
           children: <Widget>[
             Container(
               color: Colors.red,
-              child: SizedBox(
-                  width: 150.0,
-                  height: 150.0,
-                  child: Container(child: this.createTileWidgetFrom(tile))),
+              child: const Text('Tile 1'),
             ),
             Container(
               color: Colors.orange,
-              child: SizedBox(
-                  width: 150.0,
-                  height: 150.0,
-                  child: Container(child: this.createTileWidgetFrom(tile))),
+              child: const Text('Tile 2'),
             ),
             Container(
               color: Colors.yellow,

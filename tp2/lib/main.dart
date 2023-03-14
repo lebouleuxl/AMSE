@@ -7,9 +7,7 @@ import 'exo4.dart' as exo4;
 import 'exo5a.dart' as exo5a;
 import 'exo5b.dart' as exo5b;
 import 'exo5c.dart' as exo5c;
-import 'test.dart' as test;
 import 'exo6.dart' as exo6;
-import 'exo6ba.dart' as exo6ba;
 import 'exo6b.dart' as exo6b;
 import 'Taquin.dart' as Taquin;
 import 'AutreMethodeTaquin.dart' as AutreMethodeTaquin;
@@ -42,39 +40,32 @@ List exos = [
       buildFunc: (context) => exo2.SliderExample()),
   Exo(
       title: 'Exercice 4',
-      subtitle: 'Rotate&Scale image',
+      subtitle: 'Affichage d\'une tuile',
       buildFunc: (context) => exo4.DisplayTileWidget()),
   Exo(
       title: 'Exercice 5a',
-      subtitle: 'Rotate&Scale image',
+      subtitle: 'Plateau de tuiles classique',
       buildFunc: (context) => exo5a.GridViewTest()),
   Exo(
       title: 'Exercice 5b',
-      subtitle: 'Rotate&Scale image',
+      subtitle: 'Plateau de tuiles morceaux d\'image',
       buildFunc: (context) => exo5b.GridViewTest()),
   Exo(
       title: 'Exercice 5c',
-      subtitle: 'Slider',
+      subtitle: 'Plateau de tuiles avec slider de taille',
       buildFunc: (context) => exo5c.SliderExample()),
-  Exo(
-      title: 'test',
-      subtitle: 'Rotate&Scale image',
-      buildFunc: (context) => test.MyWidget()),
   Exo(
       title: 'Exercice 6',
       subtitle: 'Swip deux carrés de couleur',
       buildFunc: (context) => exo6.PositionedTiles()),
   Exo(
-      title: 'Tentative Taquin',
-      subtitle: 'Slider qui devient non dispo',
-      buildFunc: (context) => exo6ba.SliderExample()),
-  Exo(
       title: 'exo 6b',
-      subtitle: 'Taquin 4*4 szns image',
+      subtitle: 'Taquin 4*4 sans image',
       buildFunc: (context) => exo6b.PositionedTiles()),
   Exo(
       title: 'Taquin',
-      subtitle: 'Taquin',
+      subtitle:
+          'Taquin : image, choix taille, décompte déplacement, message victoire',
       buildFunc: (context) => Taquin.PositionedTiles()),
   Exo(
       title: 'Autre méthode taquin',

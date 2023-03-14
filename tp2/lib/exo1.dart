@@ -7,7 +7,7 @@ class DisplayImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Display image'),
+          title: Text('Simple image'),
         ),
         // body: Center(child: Image.network("https://picsum.photos/1024")));
         body: Center(

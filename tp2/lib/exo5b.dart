@@ -50,7 +50,7 @@ class GridViewTest extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('GridViewTest'),
+        title: Text('Plateau de tuiles morceaux d\'image'),
       ),
       body: Center(
         child: GridView.count(

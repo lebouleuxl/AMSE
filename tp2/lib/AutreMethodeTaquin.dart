@@ -54,7 +54,7 @@ class _AutreMethodeTaquinState extends State<AutreMethodeTaquin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Jeu de Taquin'),
+        title: Text('Tentative dune autre méthode pour créer le taquin'),
       ),
       body: GridView.count(
         crossAxisCount: size,

@@ -97,7 +97,7 @@ class PositionedTilesState extends State<PositionedTiles> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Moving Tiles'),
+        title: Text('Taquin 4*4 sans image'),
         centerTitle: true,
       ),
       body: GridView.builder(
@@ -123,30 +123,39 @@ class PositionedTilesState extends State<PositionedTiles> {
   }
 
   swapTiles(TileWidget tile) {
+    bool swapable = false;
     adjacentTiles.forEach((tilewidget) {
       TileWidget tw = tilewidget;
-      tw.tile.color = Colors.red;
+      if (tw.tile.NumeroTile == tile.tile.NumeroTile) {
+        swapable = true;
+      }
     });
+    if (swapable) {
+      adjacentTiles.forEach((tilewidget) {
+        TileWidget tw = tilewidget;
+        tw.tile.color = Colors.red;
+      });
 
-    int IndiceEmptyTile;
-    int i = 0;
-    tiles.forEach((tilewidget) {
-      TileWidget tw = tilewidget;
-      if (tw.tile.NumeroTile == 0) IndiceEmptyTile = i;
-      i++;
-    });
+      int IndiceEmptyTile;
+      int i = 0;
+      tiles.forEach((tilewidget) {
+        TileWidget tw = tilewidget;
+        if (tw.tile.NumeroTile == 0) IndiceEmptyTile = i;
+        i++;
+      });
 
-    int IndiceTile;
-    int j = 0;
-    tiles.forEach((tilewidget) {
-      TileWidget tw = tilewidget;
-      if (tw.tile.NumeroTile == tile.tile.NumeroTile) IndiceTile = j;
-      j++;
-    });
+      int IndiceTile;
+      int j = 0;
+      tiles.forEach((tilewidget) {
+        TileWidget tw = tilewidget;
+        if (tw.tile.NumeroTile == tile.tile.NumeroTile) IndiceTile = j;
+        j++;
+      });
 
-    TileWidget removeEmptyTile = tiles.removeAt(IndiceEmptyTile);
-    tiles.insert(IndiceEmptyTile, tile);
-    tiles.removeAt(IndiceTile);
-    tiles.insert(IndiceTile, removeEmptyTile);
+      TileWidget removeEmptyTile = tiles.removeAt(IndiceEmptyTile);
+      tiles.insert(IndiceEmptyTile, tile);
+      tiles.removeAt(IndiceTile);
+      tiles.insert(IndiceTile, removeEmptyTile);
+    }
   }
 }

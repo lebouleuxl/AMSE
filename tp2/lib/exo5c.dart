@@ -60,7 +60,7 @@ class _SliderExampleState extends State<SliderExample> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('GridViewTest'),
+        title: Text('Plateau de tuiles avec slider de taille'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

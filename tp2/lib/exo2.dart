@@ -33,7 +33,7 @@ class _SliderExampleState extends State<SliderExample> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Slider')),
+      appBar: AppBar(title: const Text('Rotate&Scale image')),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
